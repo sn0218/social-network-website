@@ -1,7 +1,7 @@
 # Social network website
 
 ## Description
-The social newtwork website is written in Python Django framework with javascript.  \ 
+The social newtwork website is written in Python Django framework with javascript.  
 This website is Twitter-like social web application for users making posts and following users.
 
 ## Features
