@@ -1,0 +1,38 @@
+#compose-post-divider{
+    max-width: 1120px;
+    width: 85%;
+}
+
+.edit-content-textarea {
+    display: none;
+}
+
+.post-username {
+    color: black;
+}
+
+#follow-button {
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 400;
+    padding: .7rem 1.5rem;
+    border-radius: 40px;
+}
+
+#unfollow-button {
+    font-size: 14px;
+    line-height: 1;
+    font-weight: 400;
+    padding: .7rem 1.5rem;
+    border-radius: 40px;
+}
+
+.like-text {
+    background: none;
+    border: none;
+}
+
+.like-text:hover {
+    text-decoration: underline;
+}
+

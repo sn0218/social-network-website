@@ -1,0 +1,141 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block script %}
+    <script src="{% static 'network/profile.js' %}"></script>
+{% endblock %}
+
+{% block body %}
+    <!-- User profile info -->
+    <div class="container py-5">
+        <div class="card">
+            <div class="card-body text-center">
+                <img class="rounded-circle shadow-1-strong me-3" src="..\static\network\blank-profile-pic.png" alt="avatar" width="100" height="83" />
+                <h4 class="card-title mt-3" id="profile-username">{{ profile_user.username }}</h4>
+                <p class="text-muted" id="name-tag">@{{ profile_user.username }}
+                    {% if user.is_authenticated %}
+                    {% if is_following %}
+                        <span class="badge badge-info" id="follow-badge">Following</span>
+                    {% endif %}
+                    {% endif %} 
+                </p>
+                          
+            <p class="card-text mt-2 mb-3" style="display: none;">
+                For what reason would it be advisable for me to think about business content?
+            </p>
+            {% if user.is_authenticated %}
+                {% if not user == profile_user %}
+                {% if is_following %}
+                    <button type="button" class="btn btn-outline-primary btn-sm mt-3 mb-4" id="unfollow-button">Unfollow</button> 
+                {% else %}
+                    <button type="button" class="btn btn-primary btn-sm mt-3 mb-4" id="follow-button">Follow</button> 
+                {% endif %}
+                {% endif %}
+            {% endif %}    
+            <div class="border-top pt-3">
+                <div class="row text-center">
+                    <div class="col-4">
+                        <h6 id="post-count"><b>{{ post_count }}</b></h6>
+                        <p>Post</p>
+                    </div>
+                    <div class="col-4">
+                        <h6 id="follower-count"><b>{{ follower_count }}</b></h6>
+                        <p>Followers</p>
+                    </div>
+                    <div class="col-4">
+                        <h6 id="following-count"><b>{{ following_count }}</b></h6>
+                        <p>Following</p>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- all posts display -->
+    <div class="container mt-5" id="all-posts-view">
+        {% if posts %}
+        {% for post in page_obj %}
+        <div class="card mb-3" id="post-{{ post.id }}">
+           
+            <div class="card-header">
+                <div class="d-flex flex-row align-items-center">
+                    <img class="rounded-circle shadow-1-strong me-3" src="..\static\network\blank-profile-pic.png" alt="avatar" width="40" height="30" />
+                    <div class="ml-2 pl-2">
+                        <a href="{% url 'profile' post.user.username %}" class="post-username"><strong>{{ post.user.username }} </strong></a>
+                        <div class="text-muted small">
+                            posted on {{ post.date }}
+                        </div> 
+                    </div>
+                </div>      
+            </div>
+            <div class="card-body">
+                <h5 class="card-title"><b>{{ post.headline }}</b></h5>
+                <p class="card-text" id="post-{{ post.id }}-content"> {{ post.content }}</p>
+                <div class="edit-content-textarea" id="disable-post-{{ post.id }}-content"></div>
+                <div id="buttons-{{ post.id }}">
+                    <div class="d-flex justify-content-between align-items-center mt-2">
+                        <div class="d-flex flex-row align-items-center">
+                            <div class="p-2">
+                                <b id="like-count-{{ post.id }}"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i>  {{ post.post_like.count }}</b>
+                                {% if user.is_authenticated %}
+                                    {% if not post in liked_posts %}
+                                        <button class="like-text" id="like-text-{{ post.id }}" value="like">Like</button>
+                                    {% else %}
+                                        <button class="like-text" id="like-text-{{ post.id }}" value="unlike">Unlike</button>
+                                    {% endif %}
+                                {% endif %}
+                                
+                            </div>
+                        
+                            <div class="p-2">
+                                <b id="comment-count"><i class="fa fa-comment-o" aria-hidden="true"></i> 0</b>
+                                {% if user.is_authenticated %}
+                                    <span class="ms-1 fs-10">Comment</span>
+                                {% endif %}
+                            </div>
+                            
+                        </div>
+                        {% if user.username == post.user.username  %}
+                        <div class="p-2">
+                            <button class="btn btn-primary btn-sm border-0 px-3 edit-button" id="edit-button-{{ post.id }}" type="button">Edit</button>
+                        </div>
+                        {% endif %}
+                    </div>  
+                </div>
+            </div>
+            
+        </div>
+        {% endfor %}  
+    </div>
+    
+    <!-- paginator -->
+    <div class="container py-3">
+        <ul class="pagination justify-content-center">
+            {% if page_obj.has_previous %}
+                <li class="page-item"><a href="?page=1" class="page-link">&laquo; First</a></li>
+                <li class="page-item"><a href="?page={{ page_obj.previous_page_number }}" class="page-link">Previous</a></li>
+            {% else %}
+            <li class="page-item disabled"><a class="page-link">&laquo; First</a></li>
+            <li class="page-item disabled"><a class="page-link">Previous</a></li>
+            {% endif %}
+                
+            {% if page_obj.number %}
+            <li class="page-item"><a class="page-link">{{ page_obj.number }}</a></li>
+            {% else %}
+            <li class="page-item"><a class="page-link">0</a></li>
+            {% endif %}
+            {% if page_obj.has_next %}
+            <li class="page-item"><a href="?page={{ page_obj.next_page_number }}" class="page-link">Next</a></li>
+            <li class="page-item"><a href="?page={{ page_obj.paginator.num_pages }}" class="page-link">Last &raquo;</a></li>
+            {% else %}
+            <li class="page-item disabled"><a class="page-link">Next</a></li>
+            <li class="page-item disabled"><a class="page-link">Last &raquo;</a></li>
+            {% endif %}
+        </ul>
+    </div>
+
+        {% else %}
+        <div class="container"><p>No posts so far.</p></div>
+        {% endif %}
+{% endblock %}
