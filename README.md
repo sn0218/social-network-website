@@ -1,5 +1,7 @@
 # Social network website
 
+![YouTube - Google Chrome 4_8_2022 0_12_24 (2)](https://user-images.githubusercontent.com/48129546/182657878-170a8e07-609e-4645-953f-a066b9cf983d.png)
+
 ## Description
 The social newtwork website is written in Python Django framework with javascript.  
 This website is Twitter-like social web application for users making posts and following users.
