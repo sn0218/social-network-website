@@ -41,7 +41,7 @@ Edit a post
 PUT /edit/<int:post_id>
 ```
 
-Follow and unfollow a user (implmeneted in profile page)
+Follow and unfollow a user (implemeneted in profile page)
 ```
 POST /follow
 POST /unfollow
