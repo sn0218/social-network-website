@@ -11,7 +11,7 @@ Most of the functions in this social network websites are designed in single-pag
  - Compose a new post
  - Edit post
  - Follow and unfollow
- - like and unlike
+ - Like and unlike
 
 ## Getting Started
 ```
