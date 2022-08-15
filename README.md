@@ -10,8 +10,10 @@ This website is Twitter-like social web application for users making posts and f
 Most of the functions in this social network websites are designed in single-page applications.
  - Compose a new post
  - Edit post
+ - User Profile Page
  - Follow and unfollow
  - Like and unlike
+ - P
 
 ## Getting Started
 ```
