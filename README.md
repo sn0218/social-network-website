@@ -17,7 +17,9 @@ Most of the functions in this social network websites are designed in single-pag
 ## Getting Started
 ```
 git-clone https://github.com/sn0218/social-network-website
+
 cd social-network-website
+
 python manage.py runserver
 ```
 
